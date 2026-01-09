@@ -2,6 +2,7 @@ package com.github.shy526;
 
 
 import com.github.shy526.caimogu.CaiMoGuHelp;
+import com.github.shy526.github.GithubHelp;
 import com.github.shy526.github.LocalFile;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
@@ -64,6 +65,7 @@ public class App
 
         Set<String> ids = LocalFile.readFile(gameIdsFileName);
         if(ids.isEmpty()){
+            log.error("生成gameId");
             ids = CaiMoGuHelp.ScanGameIds();
             LocalFile.writeFile(gameIdsFileName,ids);
         }
@@ -112,8 +114,7 @@ public class App
 
         }
         log.error("成功评价游戏数量:{}",trueFlag);
-        String acIdsStr = String.join("\n", acIds);
-
+        LocalFile.writeFile(acIdsFileName,acIds);
         //这里开始回复帖子
         Set<String> postIds = LocalFile.readFile(postIdsFileName);
         if(postIds.isEmpty()){
@@ -131,6 +132,10 @@ public class App
         log.error("成功评论帖子数量:{}",acPostNum);
         int clout2 = CaiMoGuHelp.getClout(caiMoGuToken);
         log.error("本次任务共获取影响力:{}",clout2-clout);
+        LocalFile.writeFile(postIdsFileName,postIds);
+        HashSet<String> temp = new HashSet<>();
+        temp.add( formatter.format(current));
+        LocalFile.writeFile(runFileName,temp);
     }
 
 
