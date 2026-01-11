@@ -3,7 +3,7 @@
 ## 配置方式
 1.  fork仓库
 
-2. 配置三个仓库参数
+2. 配置四个仓库参数
    - `OWNER_REPO` 用户名/仓库名
    - ~~`CAI_MO_GU_TOKEN`~~ ~~踩蘑菇的Token cmg_token~~
    - `MY_GITHUB_API_TOKEN` githubapiToken 需要读写权限
